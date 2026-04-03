@@ -1,0 +1,88 @@
+{
+  "a_cash": 34370.41,
+  "us_cash": 1000000,
+  "a_positions": {
+    "002353.SZ": {
+      "quantity": 277,
+      "avg_cost": 108.0,
+      "buy_date": "2026-04-02",
+      "market": "A"
+    },
+    "603619.SH": {
+      "quantity": 599,
+      "avg_cost": 35.06,
+      "buy_date": "2026-04-02",
+      "market": "A"
+    },
+    "601808.SH": {
+      "quantity": 911,
+      "avg_cost": 16.15,
+      "buy_date": "2026-04-02",
+      "market": "A"
+    }
+  },
+  "us_positions": {},
+  "trades": [
+    {
+      "type": "BUY",
+      "symbol": "002353.SZ",
+      "market": "A",
+      "price": 108.0,
+      "quantity": 100,
+      "cost": 10800.0,
+      "reason": "手动买入",
+      "time": "2026-04-02T16:53:44.363835"
+    },
+    {
+      "type": "BUY",
+      "symbol": "603619.SH",
+      "market": "A",
+      "price": 35.06,
+      "quantity": 200,
+      "cost": 7012.0,
+      "reason": "手动买入",
+      "time": "2026-04-02T16:55:24.102609"
+    },
+    {
+      "type": "BUY",
+      "symbol": "600028.SH",
+      "market": "A",
+      "price": 5.95,
+      "quantity": 300,
+      "cost": 1785.0,
+      "reason": "手动买入",
+      "time": "2026-04-02T16:55:25.955105"
+    },
+    {
+      "type": "BUY",
+      "market": "A",
+      "symbol": "002353.SZ",
+      "quantity": 277,
+      "price": 108.0,
+      "cost": 29916.0,
+      "reason": "涨幅7.6%超过阈值3.0%",
+      "time": "2026-04-02T18:17:17.363194"
+    },
+    {
+      "type": "BUY",
+      "market": "A",
+      "symbol": "603619.SH",
+      "quantity": 599,
+      "price": 35.06,
+      "cost": 21000.940000000002,
+      "reason": "涨幅5.7%超过阈值3.0%",
+      "time": "2026-04-02T18:17:17.363246"
+    },
+    {
+      "type": "BUY",
+      "market": "A",
+      "symbol": "601808.SH",
+      "quantity": 911,
+      "price": 16.15,
+      "cost": 14712.649999999998,
+      "reason": "涨幅4.0%超过阈值3.0%",
+      "time": "2026-04-02T18:17:17.363291"
+    }
+  ],
+  "last_update": "2026-04-02T18:17:17.363407"
+}

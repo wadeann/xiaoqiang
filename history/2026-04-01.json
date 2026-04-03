@@ -1,0 +1,24 @@
+{
+  "removed": [
+    {
+      "symbol": "00700.HK",
+      "name": "00700.HK",
+      "market": "HK",
+      "add_date": "2026-04-01",
+      "add_price": 502.0,
+      "add_change": 3.71901,
+      "current_price": 496.8,
+      "current_change": 2.64463,
+      "reason": "涨幅 3.72% 超过阈值",
+      "days_in_list": 1,
+      "highest_price": 502.0,
+      "lowest_price": 496.8,
+      "status": "watching",
+      "last_check": "2026-04-01T16:22:58.873059",
+      "holding_return": -1.035856573705177,
+      "remove_reason": "涨幅 2.64% 低于阈值 3.0%",
+      "remove_date": "2026-04-01T16:23:04.791158"
+    }
+  ],
+  "added": []
+}

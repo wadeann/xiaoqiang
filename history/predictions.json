@@ -1,0 +1,301 @@
+{
+  "records": [
+    {
+      "date": "2026-04-02",
+      "time": "10:15",
+      "symbol": "300474.SZ",
+      "open_change": -2.87,
+      "turnover": 2.67,
+      "prediction": "continue_down",
+      "actual": -3.83
+    },
+    {
+      "date": "2026-04-02",
+      "time": "10:15",
+      "symbol": "688981.SH",
+      "open_change": -1.9,
+      "turnover": 8.89,
+      "prediction": "sideways",
+      "actual": -3.25
+    },
+    {
+      "date": "2026-04-02",
+      "time": "10:15",
+      "symbol": "002049.SZ",
+      "open_change": -1.07,
+      "turnover": 3.12,
+      "prediction": "sideways",
+      "actual": -2.23
+    },
+    {
+      "date": "2026-04-02",
+      "time": "10:15",
+      "symbol": "000977.SZ",
+      "open_change": -1.37,
+      "turnover": 9.27,
+      "prediction": "sideways",
+      "actual": -3.13
+    },
+    {
+      "date": "2026-04-02",
+      "time": "10:15",
+      "symbol": "002230.SZ",
+      "open_change": -1.68,
+      "turnover": 8.61,
+      "prediction": "sideways",
+      "actual": -2.4
+    },
+    {
+      "date": "2026-04-02",
+      "time": "10:15",
+      "symbol": "300033.SZ",
+      "open_change": -2.14,
+      "turnover": 1.9,
+      "prediction": "continue_down",
+      "actual": -2.49
+    },
+    {
+      "date": "2026-04-02",
+      "time": "10:15",
+      "symbol": "603501.SH",
+      "open_change": -4.02,
+      "turnover": 10.23,
+      "prediction": "continue_down",
+      "actual": -4.89
+    },
+    {
+      "date": "2026-04-02",
+      "time": "10:15",
+      "symbol": "002371.SZ",
+      "open_change": -1.9,
+      "turnover": 2.45,
+      "prediction": "sideways",
+      "actual": -2.78
+    },
+    {
+      "date": "2026-04-02",
+      "time": "10:15",
+      "symbol": "300661.SZ",
+      "open_change": -1.72,
+      "turnover": 5.73,
+      "prediction": "sideways",
+      "actual": -4.34
+    },
+    {
+      "date": "2026-04-02",
+      "time": "10:15",
+      "symbol": "300750.SZ",
+      "open_change": 0.52,
+      "turnover": 7.61,
+      "prediction": "sideways",
+      "actual": -1.12
+    },
+    {
+      "date": "2026-04-02",
+      "time": "10:15",
+      "symbol": "002594.SZ",
+      "open_change": 0.15,
+      "turnover": 18.14,
+      "prediction": "sideways",
+      "actual": -0.97
+    },
+    {
+      "date": "2026-04-02",
+      "time": "10:39",
+      "symbol": "300474.SZ",
+      "open_change": -3.23,
+      "turnover": 0,
+      "prediction": "continue_down",
+      "actual": -3.83
+    },
+    {
+      "date": "2026-04-02",
+      "time": "10:39",
+      "symbol": "688981.SH",
+      "open_change": -2.31,
+      "turnover": 0,
+      "prediction": "continue_down",
+      "actual": -3.25
+    },
+    {
+      "date": "2026-04-02",
+      "time": "10:39",
+      "symbol": "002049.SZ",
+      "open_change": -1.57,
+      "turnover": 0,
+      "prediction": "sideways",
+      "actual": -2.23
+    },
+    {
+      "date": "2026-04-02",
+      "time": "10:39",
+      "symbol": "000977.SZ",
+      "open_change": -1.92,
+      "turnover": 0,
+      "prediction": "sideways",
+      "actual": -3.13
+    },
+    {
+      "date": "2026-04-02",
+      "time": "10:39",
+      "symbol": "002230.SZ",
+      "open_change": -1.79,
+      "turnover": 0,
+      "prediction": "sideways",
+      "actual": -2.4
+    },
+    {
+      "date": "2026-04-02",
+      "time": "10:39",
+      "symbol": "300033.SZ",
+      "open_change": -2.29,
+      "turnover": 0,
+      "prediction": "continue_down",
+      "actual": -2.49
+    },
+    {
+      "date": "2026-04-02",
+      "time": "10:39",
+      "symbol": "603501.SH",
+      "open_change": -4.11,
+      "turnover": 0,
+      "prediction": "continue_down",
+      "actual": -4.89
+    },
+    {
+      "date": "2026-04-02",
+      "time": "10:39",
+      "symbol": "002371.SZ",
+      "open_change": -2.39,
+      "turnover": 0,
+      "prediction": "continue_down",
+      "actual": -2.78
+    },
+    {
+      "date": "2026-04-02",
+      "time": "10:39",
+      "symbol": "300661.SZ",
+      "open_change": -2.34,
+      "turnover": 0,
+      "prediction": "continue_down",
+      "actual": -4.34
+    },
+    {
+      "date": "2026-04-02",
+      "time": "10:39",
+      "symbol": "300750.SZ",
+      "open_change": -0.3,
+      "turnover": 0,
+      "prediction": "sideways",
+      "actual": -1.12
+    },
+    {
+      "date": "2026-04-02",
+      "time": "10:39",
+      "symbol": "002594.SZ",
+      "open_change": -0.54,
+      "turnover": 0,
+      "prediction": "sideways",
+      "actual": -0.97
+    },
+    {
+      "date": "2026-04-03",
+      "time": "09:51",
+      "symbol": "300474.SZ",
+      "open_change": -0.41,
+      "turnover": 0,
+      "prediction": "sideways",
+      "actual": null
+    },
+    {
+      "date": "2026-04-03",
+      "time": "09:51",
+      "symbol": "688981.SH",
+      "open_change": -0.02,
+      "turnover": 0,
+      "prediction": "sideways",
+      "actual": null
+    },
+    {
+      "date": "2026-04-03",
+      "time": "09:51",
+      "symbol": "002049.SZ",
+      "open_change": -0.21,
+      "turnover": 0,
+      "prediction": "sideways",
+      "actual": null
+    },
+    {
+      "date": "2026-04-03",
+      "time": "09:51",
+      "symbol": "000977.SZ",
+      "open_change": 0.55,
+      "turnover": 0,
+      "prediction": "sideways",
+      "actual": null
+    },
+    {
+      "date": "2026-04-03",
+      "time": "09:51",
+      "symbol": "002230.SZ",
+      "open_change": 0.22,
+      "turnover": 0,
+      "prediction": "sideways",
+      "actual": null
+    },
+    {
+      "date": "2026-04-03",
+      "time": "09:51",
+      "symbol": "300033.SZ",
+      "open_change": 0.18,
+      "turnover": 0,
+      "prediction": "sideways",
+      "actual": null
+    },
+    {
+      "date": "2026-04-03",
+      "time": "09:51",
+      "symbol": "603501.SH",
+      "open_change": -1.53,
+      "turnover": 0,
+      "prediction": "sideways",
+      "actual": null
+    },
+    {
+      "date": "2026-04-03",
+      "time": "09:51",
+      "symbol": "002371.SZ",
+      "open_change": -0.46,
+      "turnover": 0,
+      "prediction": "sideways",
+      "actual": null
+    },
+    {
+      "date": "2026-04-03",
+      "time": "09:51",
+      "symbol": "300661.SZ",
+      "open_change": 1.08,
+      "turnover": 0,
+      "prediction": "sideways",
+      "actual": null
+    },
+    {
+      "date": "2026-04-03",
+      "time": "09:51",
+      "symbol": "300750.SZ",
+      "open_change": -1.96,
+      "turnover": 0,
+      "prediction": "sideways",
+      "actual": null
+    },
+    {
+      "date": "2026-04-03",
+      "time": "09:51",
+      "symbol": "002594.SZ",
+      "open_change": -0.41,
+      "turnover": 0,
+      "prediction": "sideways",
+      "actual": null
+    }
+  ]
+}

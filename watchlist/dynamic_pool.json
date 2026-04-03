@@ -1,0 +1,155 @@
+{
+  "update_time": "2026-04-02T14:46:25.346282",
+  "stocks": [
+    {
+      "symbol": "600893.SH",
+      "name": "航发动力",
+      "price": 49.61,
+      "change_pct": 1.16,
+      "turnover": 0,
+      "score": 60,
+      "sector": "军工",
+      "sector_avg": -0.62
+    },
+    {
+      "symbol": "300474.SZ",
+      "name": "景嘉微",
+      "price": 56.06,
+      "change_pct": -3.78,
+      "turnover": 0,
+      "score": 30,
+      "sector": "AI算力",
+      "sector_avg": -3.858571428571428
+    },
+    {
+      "symbol": "688041.SH",
+      "name": "海光信息",
+      "price": 212.04,
+      "change_pct": -3.75,
+      "turnover": 0,
+      "score": 30,
+      "sector": "AI算力",
+      "sector_avg": -3.858571428571428
+    },
+    {
+      "symbol": "002230.SZ",
+      "name": "科大讯飞",
+      "price": 45.87,
+      "change_pct": -2.43,
+      "turnover": 0,
+      "score": 30,
+      "sector": "AI算力",
+      "sector_avg": -3.858571428571428
+    },
+    {
+      "symbol": "000977.SZ",
+      "name": "浪潮信息",
+      "price": 56.46,
+      "change_pct": -3.45,
+      "turnover": 0,
+      "score": 30,
+      "sector": "AI算力",
+      "sector_avg": -3.858571428571428
+    },
+    {
+      "symbol": "688981.SH",
+      "name": "中芯国际",
+      "price": 92.89,
+      "change_pct": -3.57,
+      "turnover": 0,
+      "score": 30,
+      "sector": "半导体",
+      "sector_avg": -4.11125
+    },
+    {
+      "symbol": "002049.SZ",
+      "name": "紫光国微",
+      "price": 65.7,
+      "change_pct": -2.52,
+      "turnover": 0,
+      "score": 30,
+      "sector": "半导体",
+      "sector_avg": -4.11125
+    },
+    {
+      "symbol": "002371.SZ",
+      "name": "北方华创",
+      "price": 437.45,
+      "change_pct": -2.9,
+      "turnover": 0,
+      "score": 30,
+      "sector": "半导体",
+      "sector_avg": -4.11125
+    },
+    {
+      "symbol": "688396.SH",
+      "name": "华润微",
+      "price": 44.23,
+      "change_pct": -3.26,
+      "turnover": 0,
+      "score": 30,
+      "sector": "半导体",
+      "sector_avg": -4.11125
+    },
+    {
+      "symbol": "300750.SZ",
+      "name": "宁德时代",
+      "price": 399.98,
+      "change_pct": -1.41,
+      "turnover": 0,
+      "score": 30,
+      "sector": "新能源汽车",
+      "sector_avg": -1.68
+    },
+    {
+      "symbol": "002475.SZ",
+      "name": "立讯精密",
+      "price": 49.79,
+      "change_pct": -1.21,
+      "turnover": 0,
+      "score": 30,
+      "sector": "新能源汽车",
+      "sector_avg": -1.68
+    },
+    {
+      "symbol": "002475.SZ",
+      "name": "立讯精密",
+      "price": 49.79,
+      "change_pct": -1.21,
+      "turnover": 0,
+      "score": 30,
+      "sector": "消费电子",
+      "sector_avg": -1.22
+    },
+    {
+      "symbol": "600309.SH",
+      "name": "万华化学",
+      "price": 82.6,
+      "change_pct": -0.33,
+      "turnover": 0,
+      "score": 10,
+      "sector": "化工",
+      "sector_avg": -0.33
+    },
+    {
+      "symbol": "688256.SH",
+      "name": "寒武纪",
+      "price": 998.01,
+      "change_pct": -5.08,
+      "turnover": 0,
+      "score": 0,
+      "sector": "AI算力",
+      "sector_avg": -3.858571428571428
+    },
+    {
+      "symbol": "688111.SH",
+      "name": "金山办公",
+      "price": 232.52,
+      "change_pct": -4.17,
+      "turnover": 0,
+      "score": 0,
+      "sector": "AI算力",
+      "sector_avg": -3.858571428571428
+    }
+  ]
+}

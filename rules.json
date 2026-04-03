@@ -1,0 +1,10 @@
+{
+  "min_change_pct": 5.0,
+  "max_change_pct": 50.0,
+  "min_volume": 1000000,
+  "max_days_hold": 5,
+  "stop_loss_pct": -10.0,
+  "take_profit_pct": 20.0,
+  "version": 3,
+  "last_update": "2026-04-02T04:30:01.719727"
+}
