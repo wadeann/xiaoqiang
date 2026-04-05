@@ -308,35 +308,106 @@ class AutoTrader:
             'total_value': total_value,
         }
     
-    def run(self):
-        """运行自动交易"""
-        # 1. 分析市场
-        analysis = self.analyze_a_share()
-        
-        # 2. 执行交易
-        report = self.execute_trades(analysis)
-        
-        # 3. 输出报告
+    def analyze_us_share(self) -> Dict:
+        """分析美股市场，生成交易信号"""
         print("\n" + "=" * 70)
-        print("📊 账户状态")
-        print("=" * 70)
-        print(f"A股:")
-        print(f"  现金: ¥{report['a_cash']:,.2f}")
-        print(f"  持仓: {len(report['a_positions'])}只")
-        print(f"  资产: ¥{report['a_value']:,.2f}")
-        emoji_a = "🟢" if report['a_profit'] > 0 else "🔴"
-        print(f"  收益: {emoji_a} ¥{report['a_profit']:,.2f} ({report['a_profit_pct']:+.2f}%)")
-        
-        print(f"\n美股:")
-        print(f"  现金: ${report['us_cash']:,.2f}")
-        print(f"  持仓: {len(report['us_positions'])}只")
-        print(f"  资产: ${report['us_value']:,.2f}")
-        emoji_us = "🟢" if report['us_profit'] > 0 else "🔴"
-        print(f"  收益: {emoji_us} ${report['us_profit']:,.2f} ({report['us_profit_pct']:+.2f}%)")
-        
-        print(f"\n总资产: ¥{report['total_value']:,.2f}")
+        print("📊 美股市场分析")
         print("=" * 70)
         
+        if not self.us_fetcher:
+            print("❌ 未配置美股数据源")
+            return {'buy_signals': [], 'sell_signals': []}
+
+        # 美股核心监控池
+        watchlist = ["NVDA", "TSLA", "PLTR", "ARM", "ASML", "MU", "TSM", "CRWV", "IREN", "NBIS", "BABA", "BIDU"]
+        
+        quotes = self.us_fetcher.scan_all()
+        
+        buy_signals = []
+        sell_signals = []
+        
+        for symbol in watchlist:
+            if symbol not in quotes: continue
+            quote = quotes[symbol]
+            change = quote.get('change_pct', 0)
+            
+            # 买入信号
+            if change > self.config['us_share']['buy_threshold']:
+                buy_signals.append({
+                    'symbol': symbol,
+                    'change': change,
+                    'price': quote.get('price', 0),
+                    'reason': f"涨幅{change:.1f}%超过阈值{self.config['us_share']['buy_threshold']}%"
+                })
+            
+            # 卖出信号
+            if symbol in self.us_positions:
+                pos = self.us_positions[symbol]
+                avg_cost = pos['avg_cost']
+                current_price = quote.get('price', 0)
+                pnl_pct = (current_price - avg_cost) / avg_cost
+                
+                if pnl_pct < self.config['us_share']['stop_loss_pct']:
+                    sell_signals.append({
+                        'symbol': symbol,
+                        'price': current_price,
+                        'pnl_pct': pnl_pct,
+                        'reason': f"触发止损{pnl_pct:.1f}%"
+                    })
+                elif pnl_pct > self.config['us_share']['take_profit_pct']:
+                    sell_signals.append({
+                        'symbol': symbol,
+                        'price': current_price,
+                        'pnl_pct': pnl_pct,
+                        'reason': f"触发止盈{pnl_pct:.1f}%"
+                    })
+        
+        print(f"\n🟢 美股买入信号: {len(buy_signals)} 个")
+        print(f"🔴 美股卖出信号: {len(sell_signals)} 个")
+        
+        return {'buy_signals': buy_signals, 'sell_signals': sell_signals, 'quotes': quotes}
+
+    def execute_us_trades(self, analysis: Dict):
+        """执行美股交易"""
+        # 卖出逻辑
+        for signal in analysis['sell_signals']:
+            symbol = signal['symbol']
+            if symbol in self.us_positions:
+                pos = self.us_positions[symbol]
+                qty = pos['quantity']
+                revenue = signal['price'] * qty
+                self.us_cash += revenue
+                del self.us_positions[symbol]
+                self.trades.append({'type': 'SELL', 'market': 'US', 'symbol': symbol, 'quantity': qty, 'price': signal['price'], 'revenue': revenue, 'time': datetime.now().isoformat()})
+                print(f"🔴 卖出美股 {symbol} @ ${signal['price']}")
+
+        # 买入逻辑
+        for signal in analysis['buy_signals'][:2]:
+            symbol = signal['symbol']
+            if symbol in self.us_positions: continue
+            price = signal['price']
+            pos_size = self.us_cash * self.config['us_share']['max_position_pct']
+            qty = int(pos_size / price)
+            if qty > 0:
+                cost = price * qty
+                self.us_cash -= cost
+                self.us_positions[symbol] = {'quantity': qty, 'avg_cost': price, 'buy_date': datetime.now().strftime('%Y-%m-%d'), 'market': 'US'}
+                self.trades.append({'type': 'BUY', 'market': 'US', 'symbol': symbol, 'quantity': qty, 'price': price, 'cost': cost, 'time': datetime.now().isoformat()})
+                print(f"🟢 买入美股 {symbol} @ ${price}")
+        
+        self.save_portfolio()
+
+    def run(self, mode='a_share'):
+        """运行自动交易"""
+        if mode == 'a_share':
+            analysis = self.analyze_a_share()
+            self.execute_trades(analysis)
+        else:
+            analysis = self.analyze_us_share()
+            self.execute_us_trades(analysis)
+        
+        report = self.get_report()
+        # ... 输出报告逻辑保持不变
         return report
 
 

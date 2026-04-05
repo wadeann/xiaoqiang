@@ -9,10 +9,17 @@ import yaml
 import requests
 import pandas as pd
 import numpy as np
+import os
 from pathlib import Path
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional, Tuple
 import time
+
+# 禁用代理，避免国内 API 超时
+os.environ.pop('http_proxy', None)
+os.environ.pop('https_proxy', None)
+os.environ.pop('HTTP_PROXY', None)
+os.environ.pop('HTTPS_PROXY', None)
 
 
 class DataLoader:
@@ -21,19 +28,95 @@ class DataLoader:
     def __init__(self, cache_dir: str = "data/cache"):
         self.cache_dir = Path(cache_dir)
         self.cache_dir.mkdir(parents=True, exist_ok=True)
+        # 创建不使用代理的 session
+        self.session = requests.Session()
+        self.session.trust_env = False  # 忽略环境变量中的代理设置
     
     def load_a_share_history(self, symbol: str, days: int = 60) -> pd.DataFrame:
-        """加载 A股历史数据 (使用东方财富)"""
+        """加载 A股历史数据 (多数据源: 东方财富 -> akshare -> 新浪)"""
         cache_file = self.cache_dir / f"{symbol}_{days}d.csv"
         
-        # 检查缓存
+        # 检查缓存 (缓存有效期为 6 小时)
         if cache_file.exists():
             cache_time = datetime.fromtimestamp(cache_file.stat().st_mtime)
-            if datetime.now() - cache_time < timedelta(hours=1):
+            if datetime.now() - cache_time < timedelta(hours=6):
                 return pd.read_csv(cache_file)
         
-        # 转换代码格式 (300308.SZ -> 0300308)
+        # 提取纯代码
         code = symbol.replace(".SZ", "").replace(".SH", "")
+        
+        # 方法 1: 尝试 akshare (最稳定)
+        df = self._load_a_share_akshare(symbol, code, days)
+        if not df.empty:
+            df.to_csv(cache_file, index=False)
+            return df
+        
+        # 方法 2: 尝试东方财富 API
+        df = self._load_a_share_eastmoney(symbol, code, days)
+        if not df.empty:
+            df.to_csv(cache_file, index=False)
+            return df
+        
+        # 方法 3: 尝试新浪财经
+        df = self._load_a_share_sina(symbol, code, days)
+        if not df.empty:
+            df.to_csv(cache_file, index=False)
+            return df
+        
+        print(f"  加载 {symbol} 历史数据失败: 所有数据源均不可用")
+        return pd.DataFrame()
+    
+    def _load_a_share_akshare(self, symbol: str, code: str, days: int) -> pd.DataFrame:
+        """使用 akshare 获取 A股历史数据"""
+        try:
+            import akshare as ak
+            
+            end_date = datetime.now()
+            start_date = end_date - timedelta(days=days)
+            
+            # akshare 股票代码格式: "300308" (不带后缀)
+            df = ak.stock_zh_a_hist(
+                symbol=code,
+                period="daily",
+                start_date=start_date.strftime("%Y%m%d"),
+                end_date=end_date.strftime("%Y%m%d"),
+                adjust="qfq"  # 前复权
+            )
+            
+            if df.empty:
+                return pd.DataFrame()
+            
+            # 标准化列名
+            df = df.rename(columns={
+                '日期': 'date',
+                '开盘': 'open',
+                '收盘': 'close',
+                '最高': 'high',
+                '最低': 'low',
+                '成交量': 'volume',
+                '成交额': 'amount',
+                '涨跌幅': 'change_pct',
+                '换手率': 'turnover'
+            })
+            
+            # 确保列存在
+            if 'change_pct' not in df.columns:
+                df['change_pct'] = ((df['close'] - df['close'].shift(1)) / df['close'].shift(1) * 100).fillna(0)
+            
+            df['symbol'] = symbol
+            df['date'] = pd.to_datetime(df['date']).dt.strftime('%Y-%m-%d')
+            
+            # 选择需要的列
+            columns = ['date', 'open', 'close', 'high', 'low', 'volume', 'amount', 'change_pct', 'symbol']
+            df = df[[c for c in columns if c in df.columns]]
+            
+            return df
+            
+        except Exception as e:
+            return pd.DataFrame()
+    
+    def _load_a_share_eastmoney(self, symbol: str, code: str, days: int) -> pd.DataFrame:
+        """使用东方财富 API 获取 A股历史数据"""
         if symbol.endswith(".SZ"):
             secid = f"0.{code}"
         else:
@@ -42,7 +125,7 @@ class DataLoader:
         end_date = datetime.now()
         start_date = end_date - timedelta(days=days)
         
-        url = "http://push2his.eastmoney.com/api/qt/stock/kline/get"
+        url = "https://push2his.eastmoney.com/api/qt/stock/kline/get"
         params = {
             "secid": secid,
             "fields1": "f1,f2,f3,f4,f5,f6",
@@ -52,48 +135,124 @@ class DataLoader:
             "beg": start_date.strftime("%Y%m%d"),
             "end": end_date.strftime("%Y%m%d"),
         }
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+            'Referer': 'https://quote.eastmoney.com/'
+        }
         
+        # 重试机制
+        max_retries = 3
+        for attempt in range(max_retries):
+            try:
+                time.sleep(0.5 * (attempt + 1))  # 递增延迟
+                resp = self.session.get(url, params=params, headers=headers, timeout=20)
+                data = resp.json()
+                
+                if data.get("data") and data["data"].get("klines"):
+                    klines = data["data"]["klines"]
+                    columns = ["date", "open", "close", "high", "low", "volume", "amount",
+                              "amplitude", "change_pct", "change", "turnover"]
+                    
+                    parsed_data = []
+                    for k in klines:
+                        parts = k.split(",")
+                        if len(parts) >= 11:
+                            parsed_data.append(parts[:11])
+                    
+                    df = pd.DataFrame(parsed_data, columns=columns)
+                    
+                    for col in ["open", "close", "high", "low", "volume", "amount", "change_pct"]:
+                        df[col] = pd.to_numeric(df[col], errors="coerce")
+                    
+                    df["symbol"] = symbol
+                    return df
+                break
+            except Exception as e:
+                if attempt < max_retries - 1:
+                    continue
+        
+        return pd.DataFrame()
+    
+    def _load_a_share_sina(self, symbol: str, code: str, days: int) -> pd.DataFrame:
+        """使用新浪财经获取 A股历史数据 (备用)"""
         try:
-            resp = requests.get(url, params=params, timeout=10)
+            # 新浪历史数据接口
+            if symbol.endswith(".SZ"):
+                market = "sz"
+            else:
+                market = "sh"
+            
+            url = f"https://quotes.sina.cn/cn/api/json_v2.php/CN_MarketDataService.getKLineData"
+            params = {
+                "symbol": f"{market}{code}",
+                "scale": "240",  # 日K
+                "ma": "no",
+                "datalen": days
+            }
+            
+            resp = self.session.get(url, params=params, timeout=10)
             data = resp.json()
             
-            if data.get("data") and data["data"].get("klines"):
-                klines = data["data"]["klines"]
-                # 东方财富返回 11 个字段
-                columns = ["date", "open", "close", "high", "low", "volume", "amount",
-                          "amplitude", "change_pct", "change", "turnover"]
+            if data and isinstance(data, list):
+                df = pd.DataFrame(data)
+                df = df.rename(columns={
+                    'day': 'date',
+                    'open': 'open',
+                    'close': 'close',
+                    'high': 'high',
+                    'low': 'low',
+                    'volume': 'volume'
+                })
                 
-                parsed_data = []
-                for k in klines:
-                    parts = k.split(",")
-                    if len(parts) >= 11:
-                        parsed_data.append(parts[:11])
-                
-                df = pd.DataFrame(parsed_data, columns=columns)
-                
-                # 转换类型
-                for col in ["open", "close", "high", "low", "volume", "amount", "change_pct"]:
+                for col in ["open", "close", "high", "low", "volume"]:
                     df[col] = pd.to_numeric(df[col], errors="coerce")
                 
-                df["symbol"] = symbol
-                df.to_csv(cache_file, index=False)
-                return df
+                df['change_pct'] = ((df['close'] - df['close'].shift(1)) / df['close'].shift(1) * 100).fillna(0)
+                df['symbol'] = symbol
+                
+                return df[['date', 'open', 'close', 'high', 'low', 'volume', 'change_pct', 'symbol']]
+            
         except Exception as e:
-            print(f"  加载 {symbol} 历史数据失败: {e}")
+            pass
         
         return pd.DataFrame()
     
     def load_us_share_history(self, symbol: str, days: int = 60) -> pd.DataFrame:
-        """加载美股历史数据 (使用 yfinance 或其他源)"""
-        cache_file = self.cache_dir / f"{symbol}_{days}d.csv"
+        """加载美股历史数据 (优先使用本地 qlib_data，然后尝试 yfinance)"""
+        # 优先检查本地 qlib_data
+        qlib_file = Path("data/qlib_data") / f"{symbol}.csv"
+        if qlib_file.exists():
+            try:
+                df = pd.read_csv(qlib_file)
+                if not df.empty:
+                    # 标准化列名
+                    df = df.rename(columns={
+                        'Date': 'date',
+                        'Open': 'open', 
+                        'Close': 'close',
+                        'High': 'high',
+                        'Low': 'low',
+                        'Volume': 'volume'
+                    })
+                    df['symbol'] = symbol
+                    df['change_pct'] = ((df['close'] - df['close'].shift(1)) / df['close'].shift(1) * 100).fillna(0)
+                    # 过滤日期范围
+                    if 'date' in df.columns:
+                        df['date'] = pd.to_datetime(df['date'], utc=True).dt.tz_localize(None)
+                        cutoff = datetime.now() - timedelta(days=days)
+                        df = df[df['date'] >= cutoff]
+                    return df[["date", "open", "close", "high", "low", "volume", "change_pct", "symbol"]]
+            except Exception as e:
+                print(f"  本地数据加载失败 {symbol}: {e}")
         
         # 检查缓存
+        cache_file = self.cache_dir / f"{symbol}_{days}d.csv"
         if cache_file.exists():
             cache_time = datetime.fromtimestamp(cache_file.stat().st_mtime)
             if datetime.now() - cache_time < timedelta(hours=6):
                 return pd.read_csv(cache_file)
         
-        # 尝试使用 yfinance
+        # 尝试使用 yfinance (注意：可能需要代理)
         try:
             import yfinance as yf
             ticker = yf.Ticker(symbol)
@@ -116,7 +275,7 @@ class DataLoader:
                 df.to_csv(cache_file, index=False)
                 return df[["date", "open", "close", "high", "low", "volume", "change_pct", "symbol"]]
         except Exception as e:
-            print(f"  yfinance 加载失败: {e}")
+            print(f"  yfinance 加载失败 {symbol}: {e}")
         
         return pd.DataFrame()
 

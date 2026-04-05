@@ -1,0 +1,16 @@
+{
+  "starting_capital": 1000000,
+  "final_equity": 1055058.2710000006,
+  "pnl": 55058.27100000065,
+  "pnl_rate": 0.05505827100000065,
+  "pnl_pct": "5.51%",
+  "max_drawdown": 0.038427009356019504,
+  "max_drawdown_pct": "3.84%",
+  "sharpe_ratio": 0.9911950609438317,
+  "total_trades": 92,
+  "win_rate": 0.32608695652173914,
+  "win_rate_pct": "32.6%",
+  "avg_win": 11174.497866666672,
+  "avg_loss": -3661.1564193548315,
+  "profit_factor": 3.052177122941893
+}

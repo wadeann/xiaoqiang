@@ -1,0 +1,13 @@
+{
+  "timestamp": "20260404_081102",
+  "strategy": "multi_factor",
+  "starting_capital": 1000000,
+  "final_equity": 978255.2905850005,
+  "pnl": -21744.709414999466,
+  "pnl_rate": -0.021744709414999466,
+  "max_drawdown": 0.06101566545179331,
+  "sharpe_ratio": -0.2548628472417969,
+  "win_rate": 0.25,
+  "total_trades": 88,
+  "profit_factor": 2.609144479263213
+}

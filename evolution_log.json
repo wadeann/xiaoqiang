@@ -20,5 +20,67 @@
         "reason": "胜率过低 (0.0%)，建议提高选股门槛"
       }
     ]
+  },
+  {
+    "timestamp": "2026-04-03T19:18:34.633593",
+    "changes": [
+      {
+        "rule": "stop_loss_pct",
+        "from": -10.0,
+        "to": -12.0,
+        "reason": "亏损次数 (1) 远多于盈利 (0)，建议放宽止损线"
+      },
+      {
+        "rule": "min_change_pct",
+        "from": 5.0,
+        "to": 4.5,
+        "reason": "预测胜率良好 (118.2%)，可尝试降低门槛增加机会"
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-04-03T19:20:57.077116",
+    "changes": [
+      {
+        "rule": "stop_loss_pct",
+        "from": -12.0,
+        "to": -14.0,
+        "reason": "亏损次数 (1) 远多于盈利 (0)，建议放宽止损线"
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-04-03T22:57:04.754916",
+    "trigger": "持仓亏损分析",
+    "findings": [
+      "板块集中度过高",
+      "选股时机需优化",
+      "AI/半导体板块走弱"
+    ],
+    "adjustments": [
+      "min_change_pct: 提高到 5.0% (筛选更强势标的)",
+      "max_sector_exposure: 新增规则，单板块最大50%仓位",
+      "max_position_loss: 新增规则，单只持仓亏损5%预警"
+    ],
+    "new_rules": [
+      "max_sector_exposure",
+      "max_position_loss"
+    ],
+    "next_actions": [
+      "增加算力板块标的",
+      "板块分散配置",
+      "设置单只止损预警"
+    ]
+  },
+  {
+    "timestamp": "2026-04-03T23:37:50.506808",
+    "changes": [
+      {
+        "rule": "stop_loss_pct",
+        "from": -14.0,
+        "to": -16.0,
+        "reason": "亏损次数 (1) 远多于盈利 (0)，建议放宽止损线"
+      }
+    ]
   }
 ]

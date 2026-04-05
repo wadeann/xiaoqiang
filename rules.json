@@ -3,8 +3,10 @@
   "max_change_pct": 50.0,
   "min_volume": 1000000,
   "max_days_hold": 5,
-  "stop_loss_pct": -10.0,
+  "stop_loss_pct": -16.0,
   "take_profit_pct": 20.0,
-  "version": 3,
-  "last_update": "2026-04-02T04:30:01.719727"
+  "version": 8,
+  "last_update": "2026-04-03T23:37:50.506667",
+  "max_sector_exposure": 0.5,
+  "max_position_loss": -0.05
 }

@@ -47,8 +47,8 @@
 版本: pyqlib 0.9.7
 
 # 其他 qlib 环境 (未使用)
-/home/wade/workspace/ai/openclaw.0329/workspace/qlib_env/
-/home/wade/workspace/ai/openclaw.0329/workspace/projects/qlib-trader/venv/
+/home/wade/.openclaw/workspace/qlib_env/
+/home/wade/.openclaw/workspace/projects/qlib-trader/venv/
 ```
 
 ### 2.2 qlib 依赖
@@ -410,7 +410,7 @@ NVDA, TSLA, ARM, ASML, PLTR, MU, TSM, CRWV, IREN, NBIS, BABA, BIDU
 
 ### 8.2 数据隔离
 
-- 财神V8: `/home/wade/workspace/ai/stock-tracker-v8/`
+- 财神V8: `/home/wade/.openclaw/agents/cfo/workspace/stock-tracker-v8/`
 - 小强: `/home/wade/.openclaw/agents/ceo/workspace/xiaoqiang/`
 
 ### 8.3 未来整合方向
@@ -492,7 +492,7 @@ self.momentum_strategy = MomentumStrategy(top_n=5, min_change_pct=2.0)
 
 - qlib 官方文档: https://qlib.readthedocs.io/
 - Rockflow API 文档: (内部)
-- 财神V8 系统: `/home/wade/workspace/ai/stock-tracker-v8/`
+- 财神V8 系统: `/home/wade/.openclaw/agents/cfo/workspace/stock-tracker-v8/`
 
 ---
 

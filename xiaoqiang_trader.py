@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-华尔街之狼 - 自主交易引擎
+华尔街之狼 - 自主交易引擎 (Evolution 4.0)
 全自动扫描、分析、决策、执行
 """
 
@@ -9,6 +9,7 @@ import os
 import requests
 from datetime import datetime
 from pathlib import Path
+from brain import xiaoqiang_scan_logic
 
 # 配置
 API_KEY = "rk2.paper.eyJraWQiOiJha19tMnVzZWZkYnFoMWZnMG5xIiwiZXhwIjoxNzc3NTgzNDA1fQ.iZdP7wZysHn7xn3rZT7Gw01fzG7XFdFTvWrBklhcFHI"
@@ -16,7 +17,7 @@ BASE_URL = "https://paper-mcp.rockflow.tech/bot/api/http_gateway/v1"
 
 # 交易规则
 RULES = {
-    "min_change_pct": 4.0,        # 最小涨幅阈值 (进化后)
+    "min_change_pct": 2.0,        # 最小涨幅阈值 (进化后)
     "max_change_pct": 50.0,       # 最大涨幅阈值
     "stop_loss_pct": -10.0,       # 止损线
     "take_profit_pct": 20.0,      # 止盈线
@@ -123,7 +124,7 @@ class WolfTrader:
     def scan_market(self):
         """扫描市场，寻找交易机会"""
         self.log("=" * 70)
-        self.log("🔍 扫描市场...")
+        self.log("🔍 协同扫描模式启动 (XiaoQiang + Judy + CFO)... ")
         
         opportunities = []
         
@@ -132,7 +133,7 @@ class WolfTrader:
             quote = self.get_quote(symbol, "US")
             if quote and quote["price"] > 0:
                 change_pct = quote["change_pct"]
-                if change_pct >= RULES["min_change_pct"] and change_pct <= RULES["max_change_pct"]:
+                if xiaoqiang_scan_logic(symbol.lower(), quote["change_pct"] / 100.0):
                     opportunities.append({
                         "symbol": symbol,
                         "market": "US",
@@ -146,7 +147,7 @@ class WolfTrader:
             quote = self.get_quote(symbol, "HK")
             if quote and quote["price"] > 0:
                 change_pct = quote["change_pct"]
-                if change_pct >= RULES["min_change_pct"] and change_pct <= RULES["max_change_pct"]:
+                if xiaoqiang_scan_logic(symbol.lower(), quote["change_pct"] / 100.0):
                     opportunities.append({
                         "symbol": symbol,
                         "market": "HK",
@@ -158,7 +159,7 @@ class WolfTrader:
         # 按涨幅排序
         opportunities.sort(key=lambda x: x["change_pct"], reverse=True)
         
-        self.log(f"发现 {len(opportunities)} 个交易机会")
+        self.log(f"协同决策发现 {len(opportunities)} 个通过 AI 验证的交易机会")
         for i, opp in enumerate(opportunities[:5], 1):
             self.log(f"  {i}. {opp['symbol']}: {opp['change_pct']:+.2f}% @ ${opp['price']:.2f}")
         
@@ -261,7 +262,7 @@ class WolfTrader:
         """主循环"""
         self.log("")
         self.log("=" * 70)
-        self.log("🐺 华尔街之狼 - 自主交易引擎启动")
+        self.log("🐺 华尔街之狼 - 自主交易引擎 (Evolution 4.0)启动")
         self.log(f"📅 {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         self.log("=" * 70)
         
@@ -320,7 +321,7 @@ class WolfTrader:
 
 if __name__ == "__main__":
     import argparse
-    parser = argparse.ArgumentParser(description="华尔街之狼自主交易引擎")
+    parser = argparse.ArgumentParser(description="华尔街之狼自主交易引擎 (Evolution 4.0)")
     parser.add_argument("--run", action="store_true", help="执行交易")
     parser.add_argument("--scan", action="store_true", help="仅扫描市场")
     parser.add_argument("--status", action="store_true", help="查看状态")

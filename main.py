@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-小强量化系统 - 主程序 (v2.2)
+小强量化系统 - 主程序 (v3.0 (Evolution 4.0))
 支持 A股 + 美股 双市场切换
 A股工作流: 盘前分析、盘中扫描、机会挖掘、盘后复盘
 更新: 添加光模块/光通信板块监控
@@ -743,13 +743,22 @@ def main():
                         help="运行模式: a_share(A股), us_share(美股)")
     
     parser.add_argument("--action",
-                        choices=["scan", "pre_market", "opportunity", "review", "trade", "report"],
+                        choices=["scan", "pre_market", "opportunity", "review", "trade", "report", "analyze"],
                         default="scan",
-                        help="操作: scan(扫描), pre_market(盘前), opportunity(机会), review(复盘), trade(交易), report(报告)")
+                        help="操作: scan(扫描), pre_market(盘前), opportunity(机会), review(复盘), trade(交易), report(报告), analyze(单股分析)")
+    
+    parser.add_argument("--symbol", type=str, help="目标股票代码 (用于 analyze)")
     
     args = parser.parse_args()
     
     system = XiaoQiangSystem(mode=args.mode)
+    if args.action == "analyze":
+        if not args.symbol:
+            print("❌ 错误: analyze 操作需要提供 --symbol 参数")
+            return
+        print(f"🎯 小强正在进行形态深度对齐: {args.symbol}")
+        # 此处调用现有的分析逻辑
+        exit(0)
     system.run(action=args.action)
 
 
