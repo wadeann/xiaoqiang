@@ -296,6 +296,177 @@
       "turnover": 0,
       "prediction": "sideways",
       "actual": null
+    },
+    {
+      "date": "2026-04-06",
+      "time": "09:20",
+      "symbol": "300474.SZ",
+      "open_change": -1.749063001963241,
+      "turnover": 0,
+      "prediction": "sideways",
+      "actual": null
+    },
+    {
+      "date": "2026-04-06",
+      "time": "09:20",
+      "symbol": "688981.SH",
+      "open_change": -1.523605150214594,
+      "turnover": 0,
+      "prediction": "sideways",
+      "actual": null
+    },
+    {
+      "date": "2026-04-06",
+      "time": "09:20",
+      "symbol": "002049.SZ",
+      "open_change": -1.487101669195757,
+      "turnover": 0,
+      "prediction": "sideways",
+      "actual": null
+    },
+    {
+      "date": "2026-04-06",
+      "time": "09:20",
+      "symbol": "300308.SZ",
+      "open_change": 4.213058419243984,
+      "turnover": 0,
+      "prediction": "sideways",
+      "actual": null
+    },
+    {
+      "date": "2026-04-06",
+      "time": "09:20",
+      "symbol": "300394.SZ",
+      "open_change": 3.4262701363073114,
+      "turnover": 0,
+      "prediction": "sideways",
+      "actual": null
+    },
+    {
+      "date": "2026-04-06",
+      "time": "09:20",
+      "symbol": "300502.SZ",
+      "open_change": 1.7452903975507836,
+      "turnover": 0,
+      "prediction": "sideways",
+      "actual": null
+    },
+    {
+      "date": "2026-04-06",
+      "time": "09:20",
+      "symbol": "002281.SZ",
+      "open_change": 7.735399284862926,
+      "turnover": 0,
+      "prediction": "sideways",
+      "actual": null
+    },
+    {
+      "date": "2026-04-06",
+      "time": "09:20",
+      "symbol": "300570.SZ",
+      "open_change": 0.43742188894841016,
+      "turnover": 0,
+      "prediction": "sideways",
+      "actual": null
+    },
+    {
+      "date": "2026-04-06",
+      "time": "09:20",
+      "symbol": "688205.SH",
+      "open_change": 19.99902917334111,
+      "turnover": 0,
+      "prediction": "sideways",
+      "actual": null
+    },
+    {
+      "date": "2026-04-06",
+      "time": "09:20",
+      "symbol": "688195.SH",
+      "open_change": 19.22400450260308,
+      "turnover": 0,
+      "prediction": "sideways",
+      "actual": null
+    },
+    {
+      "date": "2026-04-06",
+      "time": "09:20",
+      "symbol": "688307.SH",
+      "open_change": 13.032744282744286,
+      "turnover": 0,
+      "prediction": "sideways",
+      "actual": null
+    },
+    {
+      "date": "2026-04-06",
+      "time": "09:20",
+      "symbol": "000977.SZ",
+      "open_change": 0.5119152691968211,
+      "turnover": 0,
+      "prediction": "sideways",
+      "actual": null
+    },
+    {
+      "date": "2026-04-06",
+      "time": "09:20",
+      "symbol": "002230.SZ",
+      "open_change": -0.3487358326068084,
+      "turnover": 0,
+      "prediction": "sideways",
+      "actual": null
+    },
+    {
+      "date": "2026-04-06",
+      "time": "09:20",
+      "symbol": "300033.SZ",
+      "open_change": -1.7779268701777964,
+      "turnover": 0,
+      "prediction": "sideways",
+      "actual": null
+    },
+    {
+      "date": "2026-04-06",
+      "time": "09:20",
+      "symbol": "603501.SH",
+      "open_change": -1.3136288998357841,
+      "turnover": 0,
+      "prediction": "sideways",
+      "actual": null
+    },
+    {
+      "date": "2026-04-06",
+      "time": "09:20",
+      "symbol": "002371.SZ",
+      "open_change": -2.636986301369866,
+      "turnover": 0,
+      "prediction": "continue_down",
+      "actual": null
+    },
+    {
+      "date": "2026-04-06",
+      "time": "09:20",
+      "symbol": "300661.SZ",
+      "open_change": 1.052631578947359,
+      "turnover": 0,
+      "prediction": "sideways",
+      "actual": null
+    },
+    {
+      "date": "2026-04-06",
+      "time": "09:20",
+      "symbol": "300750.SZ",
+      "open_change": -3.666774684049165,
+      "turnover": 0,
+      "prediction": "continue_down",
+      "actual": null
+    },
+    {
+      "date": "2026-04-06",
+      "time": "09:20",
+      "symbol": "002594.SZ",
+      "open_change": -2.597147073290704,
+      "turnover": 0,
+      "prediction": "continue_down",
+      "actual": null
     }
   ]
 }
