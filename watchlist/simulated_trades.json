@@ -1,27 +1,46 @@
 {
-  "a_cash": 34370.41,
+  "a_cash": 4958.849999999991,
   "us_cash": 1000000,
   "a_positions": {
-    "002353.SZ": {
-      "quantity": 277,
-      "avg_cost": 108.0,
-      "buy_date": "2026-04-02",
+    "688981.SH": {
+      "quantity": 456,
+      "avg_cost": 95.62,
+      "buy_date": "2026-04-08",
       "market": "A"
     },
-    "603619.SH": {
-      "quantity": 599,
-      "avg_cost": 35.06,
-      "buy_date": "2026-04-02",
-      "market": "A"
-    },
-    "601808.SH": {
-      "quantity": 911,
-      "avg_cost": 16.15,
-      "buy_date": "2026-04-02",
+    "603019.SH": {
+      "quantity": 538,
+      "avg_cost": 82.73,
+      "buy_date": "2026-04-08",
       "market": "A"
     }
   },
-  "us_positions": {},
+  "us_positions": {
+    "ARM": {
+      "quantity": 1050,
+      "avg_cost": 156.22,
+      "last_price": 149.7,
+      "profit_pct": -4.06
+    },
+    "ASML": {
+      "quantity": 120,
+      "avg_cost": 1379.7,
+      "last_price": 1353.74,
+      "profit_pct": -1.28
+    },
+    "MU": {
+      "quantity": 1464,
+      "avg_cost": 369.54,
+      "last_price": 399.75,
+      "profit_pct": 8.65
+    },
+    "TSM": {
+      "quantity": 381,
+      "avg_cost": 348.06,
+      "last_price": 359.3,
+      "profit_pct": 3.43
+    }
+  },
   "trades": [
     {
       "type": "BUY",
@@ -82,7 +101,67 @@
       "cost": 14712.649999999998,
       "reason": "涨幅4.0%超过阈值3.0%",
       "time": "2026-04-02T18:17:17.363291"
+    },
+    {
+      "type": "SELL",
+      "symbol": "603619.SH",
+      "market": "A",
+      "price": 25.42,
+      "quantity": 599,
+      "cost": 15226.580000000002,
+      "reason": "止损 -5% (亏损-27.5%)",
+      "time": "2026-04-08T07:51:40.147282"
+    },
+    {
+      "type": "SELL",
+      "symbol": "601808.SH",
+      "market": "A",
+      "price": 14.5,
+      "quantity": 911,
+      "cost": 13209.5,
+      "reason": "止损 -5% (亏损-10.2%)",
+      "time": "2026-04-08T07:51:40.147303"
+    },
+    {
+      "type": "SELL",
+      "symbol": "002353.SZ",
+      "market": "A",
+      "price": 101.66,
+      "quantity": 277,
+      "cost": 28159.82,
+      "reason": "止损 -5% (亏损-5.9%)",
+      "time": "2026-04-08T07:51:40.147310"
+    },
+    {
+      "type": "BUY",
+      "symbol": "688981.SH",
+      "market": "A",
+      "price": 95.62,
+      "quantity": 856,
+      "cost": 81850.72,
+      "reason": "动量策略: 涨幅+4.18%, 符合3%-8%买入条件",
+      "time": "2026-04-08T07:59:18.956084"
+    },
+    {
+      "type": "SELL",
+      "symbol": "688981.SH",
+      "market": "A",
+      "price": 100.88,
+      "quantity": 400,
+      "cost": 40352.0,
+      "reason": "接近止盈，部分卖出锁定利润",
+      "time": "2026-04-08T14:32:22.543147"
+    },
+    {
+      "type": "BUY",
+      "symbol": "603019.SH",
+      "market": "A",
+      "price": 82.73,
+      "quantity": 538,
+      "cost": 44508.740000000005,
+      "reason": "动量策略: 涨幅+6.15%, AI算力板块",
+      "time": "2026-04-08T14:32:22.543163"
     }
   ],
-  "last_update": "2026-04-02T18:17:17.363407"
+  "last_update": "2026-04-08T08:00:45.039570"
 }
