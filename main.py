@@ -297,6 +297,35 @@ class MarketScanner:
 
         return opportunities
 
+    def a_share_post_market(self):
+        """A股盘后总结"""
+        logger.info("=" * 50)
+        logger.info("🏁 A股盘后总结启动")
+        logger.info("=" * 50)
+
+        watchlist = self.load_watchlist()
+        scores = self.load_scores()
+        name_map = self.load_name_map()
+
+        # 复盘今日表现（简单逻辑：按评分排名前10的标的）
+        summary = []
+        top_scores = sorted(scores.items(), key=lambda x: x[1], reverse=True)[:10]
+
+        for code, score in top_scores:
+            name = name_map.get(code, code)
+            summary.append({
+                'code': code,
+                'name': name,
+                'final_score': score,
+                'status': 'REVIEWED'
+            })
+
+        logger.info(f"✅ 盘后总结完成，今日核心标的 {len(summary)} 只")
+        for s in summary[:5]:
+            logger.info(f"  {s['name']}({s['code']}): 最终评分 {s['final_score']:.4f}")
+
+        return summary
+
     def us_share_scan(self):
         """美股扫描"""
         logger.info("=" * 50)
@@ -361,7 +390,7 @@ def main():
     parser.add_argument('--mode', type=str, choices=['a_share', 'us_share'],
                         help='Market mode: a_share (A股) or us_share (美股)')
     parser.add_argument('--action', type=str,
-                        choices=['pre_market', 'scan', 'opportunity', 'trade'],
+                        choices=['pre_market', 'scan', 'opportunity', 'trade', 'post_market'],
                         help='Action to perform')
 
     args = parser.parse_args()
@@ -391,6 +420,10 @@ def main():
             elif args.action == 'opportunity':
                 results = scanner.a_share_opportunity()
                 print(json.dumps({'mode': 'a_share', 'action': 'opportunity', 'results': results}, indent=2, ensure_ascii=False))
+
+            elif args.action == 'post_market':
+                results = scanner.a_share_post_market()
+                print(json.dumps({'mode': 'a_share', 'action': 'post_market', 'results': results}, indent=2, ensure_ascii=False))
 
         elif args.mode == 'us_share':
             if args.action == 'scan':
